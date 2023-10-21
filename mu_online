@@ -1,0 +1,33 @@
+rooms = input().split("|")
+
+health = 100
+bitcoins = 0
+
+for room in rooms:
+    command = room.split()
+    health_value = int(command[1])
+    if "potion" in command:
+        if health + health_value > 100:
+            print(f"You healed for {100 - health} hp.")
+            health = 100
+            print(f"Current health: {health} hp.")
+        else:
+            health += health_value
+            print(f"You healed for {health_value} hp.")
+            print(f"Current health: {health} hp.")
+    elif "chest" in command:
+        bitcoins += health_value
+        print(f"You found {health_value} bitcoins.")
+    else:
+        health -= health_value
+        if health > 0:
+            print(f"You slayed {command[0]}.")
+        else:
+            print(f"You died! Killed by {command[0]}.")
+            print(f"Best room: {rooms.index(room) + 1}")
+            exit()
+
+if health >= 0:
+    print(f"You've made it!")
+    print(f"Bitcoins: {bitcoins}")
+    print(f"Health: {health}")
