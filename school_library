@@ -1,0 +1,35 @@
+shelf = input().split('&')
+
+command = input()
+while command != 'Done':
+    command = input()
+
+    tokens = command.split()
+    action = tokens[0]
+
+    if action == 'Add book':
+        book = tokens[1]
+        if book not in shelf:
+            shelf.insert(0, book)
+    elif action == 'Take book':
+        book = tokens[1]
+        if book in shelf:
+            shelf.remove(book)
+
+    elif action == 'Swap book':
+        book1, book2 = tokens[1], tokens[2]
+        if book1 in shelf and book2 in shelf:
+            tokens[1], tokens[2] = tokens[2], tokens[1]
+
+    elif action == 'Insert book':
+        book = tokens[1]
+        if book not in shelf:
+            shelf.append(book)
+
+    elif action == 'Check book':
+        index = int(tokens[1])
+        if index <= 0 or index < len(shelf):
+            print(shelf[index])
+
+print(', '.join(shelf))
+
