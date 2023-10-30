@@ -1,0 +1,33 @@
+sequence = input()
+numbers = list(map(int, sequence.split()))
+
+while True:
+    command = input()
+
+    if command == "Finish":
+        break
+
+    tokens = command.split()
+    action = tokens[0]
+
+    if action == "Add":
+        value = int(tokens[1])
+        numbers.append(value)
+    elif action == "Remove":
+        value = int(tokens[1])
+        if value in numbers:
+            numbers.remove(value)
+    elif action == "Replace":
+        old_value, new_value = map(int, tokens[1:])
+        if old_value in numbers:
+            index = numbers.index(old_value)
+            numbers[index] = new_value
+    elif action == "Collapse":
+        value = int(tokens[1])
+        updated_numbers = []
+        for num in numbers:
+            if num >= value:
+                updated_numbers.append(num)
+        numbers = updated_numbers
+
+print(" ".join(map(str, numbers)))
